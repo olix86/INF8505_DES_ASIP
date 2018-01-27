@@ -59,8 +59,6 @@ Takes roughly 1h30 on a 7th gen i5 laptop
 
 https://github.com/freechipsproject/rocket-chip#how
 
-
-
     #JDE _and_ JDE are required, even if the README only mentions JDE
     sudo apt install default-jre default-jdk
     
@@ -77,7 +75,10 @@ https://github.com/freechipsproject/rocket-chip#how
     cd $ROCKETCHIP/vsim
     make verilog CONFIG=DefaultFPGAConfig
 
+    
 3. Rocket chip for FPGA
+
+https://github.com/ucb-bar/fpga-zynq#bitstream
 
     cd $TOP
     git clone https://github.com/ucb-bar/fpga-zynq.git
@@ -88,4 +89,5 @@ https://github.com/freechipsproject/rocket-chip#how
     
     #Build verilog
     make rocket
-https://github.com/ucb-bar/fpga-zynq#bitstream
+
+    
