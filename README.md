@@ -3,7 +3,7 @@
 ## Similar research
 
 Fully pipelined DES on FPGA
-https://www.cl.cam.ac.uk/~rnc1/descrack/DEScracker.html
+- https://www.cl.cam.ac.uk/~rnc1/descrack/DEScracker.html
 
 
 Ajout d'instruction pour RISC-V
@@ -19,7 +19,7 @@ Simulateur
 
 
 ## Generating the rocket core (tested on debian sid 27-01-2018)
-Étapes : 
+Steps
 
 
 1. Install riscv-tools
@@ -53,17 +53,39 @@ https://github.com/riscv/riscv-tools/blob/master/README.md
     #Should see "hello world"
     
     
-Environ 1h30 sur mon laptop
+Takes roughly 1h30 on a 7th gen i5 laptop
 
 2. Rocket chip generator
 
 https://github.com/freechipsproject/rocket-chip#how
 
-JDE _and_ JDE are required, even if the README only mentions JDE
 
+
+    #JDE _and_ JDE are required, even if the README only mentions JDE
     sudo apt install default-jre default-jdk
+    
+    #Install rocket chip generator
+    cd $TOP
+    git clone https://github.com/ucb-bar/rocket-chip.git
+    cd rocket-chip
+    export ROCKETCHIP=`pwd`
+    git submodule update --init
+    cd riscv-tools
+    git submodule update --init --recursive riscv-tests
 
+    #Generate verilog for FPGA
+    cd $ROCKETCHIP/vsim
+    make verilog CONFIG=DefaultFPGAConfig
 
 3. Rocket chip for FPGA
 
+    cd $TOP
+    git clone https://github.com/ucb-bar/fpga-zynq.git
+    cd fpga-zynq/zedboard
+    make init-submodules
+    export ROCKET_DIR=$ROCKETCHIP
+    
+    
+    #Build verilog
+    make rocket
 https://github.com/ucb-bar/fpga-zynq#bitstream
