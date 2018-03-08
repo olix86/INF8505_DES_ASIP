@@ -89,5 +89,53 @@ https://github.com/ucb-bar/fpga-zynq#bitstream
     
     #Build verilog
     make rocket
+    
+    
+    
+    
+    
+Project Template
+----------------
 
+    #Setup directory
+    mkdir riskv_proj
+    cd riskv_proj
+    
+    
+    #Clone the git repo
+    https://github.com/ucb-bar/project-template.git
+    cd project-template/
+    git submodule update --init --recursive
+    cd rocket-chip/
+    export TOP=$(pwd)
+    cd $TOP/riscv-tools
+    
+    # Install required tools
+    sudo apt install autoconf automake autotools-dev curl device-tree-compiler libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev
+    
+    #Start the build
+    export RISCV=$TOP/riscv
+    export PATH=$PATH:$RISCV/bin
+    ./build.sh
+    
+    #Test the toolchain
+    cd $TOP
+    echo -e '#include <stdio.h>\n int main(void) { printf("Hello world!\\n"); return 0; }' > hello.c
+    riscv64-unknown-elf-gcc -o hello hello.c
+    spike pk hello
+    
+    #Should see "hello world"
+
+    #Build tests
+    cd $TOP/riscv-tests
+    autoconf
+    ./configure --prefix=$RISCV/target
+    make
+    
+    cd $TOP
+    cd ,,/verisim
+    make
+    ./simulator-example-DefaultExampleConfig $RISCV/riscv64-unknown-elf/share/riscv-tests/isa/rv64ui-p-simple
+
+    
     
