@@ -98,12 +98,12 @@ Project Template
 ----------------
 
     #Setup directory
-    mkdir riskv_proj
-    cd riskv_proj
+    mkdir riscv_proj
+    cd riscv_proj
     
     
     #Clone the git repo
-    https://github.com/ucb-bar/project-template.git
+    git clone https://github.com/ucb-bar/project-template.git
     cd project-template/
     git submodule update --init --recursive
     cd rocket-chip/
