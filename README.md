@@ -110,6 +110,9 @@ Project Template
     export TOP=$(pwd)
     cd $TOP/riscv-tools
     
+    #Roughly 3GB
+    
+    
     # Install required tools
     sudo apt install autoconf automake autotools-dev curl device-tree-compiler libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev
     
@@ -117,6 +120,8 @@ Project Template
     export RISCV=$TOP/riscv
     export PATH=$PATH:$RISCV/bin
     ./build.sh
+    
+    #Rougly 8GB
     
     #Test the toolchain
     cd $TOP
@@ -127,15 +132,22 @@ Project Template
     #Should see "hello world"
 
     #Build tests
-    cd $TOP/riscv-tests
+    cd $TOP/riscv-tools/riscv-tests
     autoconf
     ./configure --prefix=$RISCV/target
     make
     
     cd $TOP
-    cd ,,/verisim
+    cd ../verisim
     make
     ./simulator-example-DefaultExampleConfig $RISCV/riscv64-unknown-elf/share/riscv-tests/isa/rv64ui-p-simple
+    
+    #Erreur, remplacer les lignes CXXFLAGS et LDFLAGS dans Makefile
+    CXXFLAGS := $(CXXFLAGS) -O1 -std=c++11 -I$(RISCV)/include -I$(base_dir)/rocket-chip/riscv/include -D__STDC_FORMAT_MACROS
+    LDFLAGS := $(LDFLAGS) -L$(RISCV)/lib -Wl,-rpath,$(RISCV)/lib -L$(sim_dir) -L$(base_dir)/rocket-chip/riscv/lib -lfesvr -lpthread
+    
+    
+    ./simulator-example-DefaultExampleConfig $RISCV/riscv64-unknown-elf/share/riscv-tests/isa/rv64ui-p-simple +verbose
 
-    
-    
+    make  CONFIG=RoccExampleConfig
+
