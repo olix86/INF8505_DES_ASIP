@@ -89,3 +89,67 @@ https://github.com/ucb-bar/fpga-zynq#bitstream
     #Build verilog
     make rocket
      
+    #Erreur, remplacer les lignes CXXFLAGS et LDFLAGS dans Makefile
+    CXXFLAGS := $(CXXFLAGS) -O1 -std=c++11 -I$(RISCV)/include -I$(base_dir)/rocket-chip/riscv/include -D__STDC_FORMAT_MACROS
+    LDFLAGS := $(LDFLAGS) -L$(RISCV)/lib -Wl,-rpath,$(RISCV)/lib -L$(sim_dir) -L$(base_dir)/rocket-chip/riscv/lib -lfesvr -lpthread
+    
+
+    
+4. Files to modify for RoCC    
+rocket-chip/src/main/scala/coreplex/Configs.scala 
+rocket-chip/src/main/scala/tile/LazyRoCC.scala 
+
+Conf de parametres du proc
+rocket-chip/src/main/scala/tile/RocketTile.scala
+
+
+5.
+LazyRoCC
+
+class  testOli(implicit p: Parameters) extends LazyRoCC {
+  override lazy val module = new testOliModule(this)
+}
+class testOliModule(outer: testOli)(implicit p: Parameters) extends LazyRoCCModule(outer)
+with HasCoreParameters {
+    //val cmd = Queue(io.cmd)
+    
+    val s_idle :: s_ptw_req :: s_ptw_resp :: s_resp :: Nil = Enum(Bits(), 4)
+    val state = Reg(init = s_idle)
+
+    io.cmd.ready := (state === s_idle)
+  
+     io.resp.bits.rd := io.cmd.bits.rs1 + io.cmd.bits.rs2
+}
+    
+6.
+
+class WithRoccExample extends Config((site, here, up) => {
+  case RocketTilesKey => up(RocketTilesKey, site) map { r =>
+    r.copy(rocc =
+      Seq(
+        RoCCParams(
+          opcodes = OpcodeSet.custom0,
+          generator = (p: Parameters) => {
+            val accumulator = LazyModule(new AccumulatorExample()(p))
+            accumulator}),
+        RoCCParams(
+          opcodes = OpcodeSet.custom1,
+          generator = (p: Parameters) => {
+            val translator = LazyModule(new TranslatorExample()(p))
+            translator},
+          nPTWPorts = 1),
+        RoCCParams(
+          opcodes = OpcodeSet.custom2,
+          generator = (p: Parameters) => {
+            val counter = LazyModule(new CharacterCountExample()(p))
+            counter
+          }),
+        RoCCParams(
+          opcodes = OpcodeSet.custom3,
+          generator = (p: Parameters) => {
+            val testVal = LazyModule(new testOli()(p))
+            testVal
+          })
+        ))
+    }
+})
