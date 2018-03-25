@@ -1,8 +1,8 @@
-class  SubstitutionExample(implicit p: Parameters) extends LazyRoCC {
-  override lazy val module = new SubstitutionExampleModule(this)
+class  Substitution(implicit p: Parameters) extends LazyRoCC {
+  override lazy val module = new SubstitutionModule(this)
 }
 
-class SubstitutionExampleModule(outer: SubstitutionExample)(implicit p: Parameters) extends LazyRoCCModule(outer)
+class SubstitutionModule(outer: Substitution)(implicit p: Parameters) extends LazyRoCCModule(outer)
 with HasCoreParameters {
 	
     val s_idle :: s_resp :: Nil = Enum(Bits(), 2)

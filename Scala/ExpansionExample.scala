@@ -1,8 +1,8 @@
-class  IpExample(implicit p: Parameters) extends LazyRoCC {
-  override lazy val module = new IpExampleModule(this)
+class  Expansion(implicit p: Parameters) extends LazyRoCC {
+  override lazy val module = new ExpansionModule(this)
 }
 
-class IpExampleModule(outer: IpExample)(implicit p: Parameters) extends LazyRoCCModule(outer)
+class ExpansionModule(outer: Expansion)(implicit p: Parameters) extends LazyRoCCModule(outer)
 with HasCoreParameters {
 	
     val s_idle :: s_resp :: Nil = Enum(Bits(), 2)
@@ -24,7 +24,7 @@ with HasCoreParameters {
 				a(12-1), a(13-1), a(12-1), a(13-1), a(14-1), a(15-1), a(16-1), a(17-1),
 				a(16-1), a(17-1), a(18-1), a(19-1), a(20-1), a(21-1), a(20-1), a(21-1),
 				a(22-1), a(23-1), a(24-1), a(25-1), a(24-1), a(25-1), a(26-1), a(27-1),
-				a(28-1), a(29-1), a(28-1), a(29-1), a(30-1), a(31-1), a(32-1), a(1-1)))
+				a(28-1), a(29-1), a(28-1), a(29-1), a(30-1), a(31-1), a(32-1), a(1-1))
     
     when (io.cmd.fire()) {
 		output := x

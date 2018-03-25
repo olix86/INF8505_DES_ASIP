@@ -1,8 +1,8 @@
-class  IpExample(implicit p: Parameters) extends LazyRoCC {
-  override lazy val module = new IpExampleModule(this)
+class  Permutation(implicit p: Parameters) extends LazyRoCC {
+  override lazy val module = new PermutationModule(this)
 }
 
-class IpExampleModule(outer: IpExample)(implicit p: Parameters) extends LazyRoCCModule(outer)
+class PermutationModule(outer: Permutation)(implicit p: Parameters) extends LazyRoCCModule(outer)
 with HasCoreParameters {
 	
     val s_idle :: s_resp :: Nil = Enum(Bits(), 2)
