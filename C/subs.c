@@ -77,7 +77,7 @@ static unsigned long s_rocc(unsigned long input_block)
 {
 	unsigned long output_block;
 	//asm volatile ("fence");
-	ROCC_INSTRUCTION_DS(0, output_block, input_block, 0);
+	ROCC_INSTRUCTION_DS(1, output_block, input_block, 0);
 	return output_block;
 }
 

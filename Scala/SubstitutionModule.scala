@@ -67,32 +67,81 @@ with HasCoreParameters {
     
     val a = io.cmd.bits.rs1
 	
-	val a1 = a(5,0)
+	/*val a1 = a(5,0)
 	val a2 = a(11,6)
 	val a3 = a(17,12)
 	val a4 = a(23,18)
 	val a5 = a(29,24)
 	val a6 = a(35,30)
 	val a7 = a(41,36)
-	val a8 = a(47,42)
+	val a8 = a(47,42)*/
 	
-	val a1_x = Cat(a1(0),a1(5))
+	val a8 = a(5,0)
+	val a7 = a(11,6)
+	val a6 = a(17,12)
+	val a5 = a(23,18)
+	val a4 = a(29,24)
+	val a3 = a(35,30)
+	val a2 = a(41,36)
+	val a1 = a(47,42)
+	
+	/*val a1_x = Cat(a1(0),a1(5))
 	val a2_x = Cat(a2(0),a2(5))
 	val a3_x = Cat(a3(0),a3(5))
 	val a4_x = Cat(a4(0),a4(5))
 	val a5_x = Cat(a5(0),a5(5))
 	val a6_x = Cat(a6(0),a6(5))
 	val a7_x = Cat(a7(0),a7(5))
-	val a8_x = Cat(a8(0),a8(5))
+	val a8_x = Cat(a8(0),a8(5))*/
 	
-	val a1_y = a1(4,1)
-	val a2_y = a2(4,1)
-	val a3_y = a3(4,1)
-	val a4_y = a4(4,1)
-	val a5_y = a5(4,1)
-	val a6_y = a6(4,1)
-	val a7_y = a7(4,1)
-	val a8_y = a8(4,1)
+	/*val a1_x = Reverse(Cat(a1(5),a1(0)))
+	val a2_x = Reverse(Cat(a2(5),a2(0)))
+	val a3_x = Reverse(Cat(a3(5),a3(0)))
+	val a4_x = Reverse(Cat(a4(5),a4(0)))
+	val a5_x = Reverse(Cat(a5(5),a5(0)))
+	val a6_x = Reverse(Cat(a6(5),a6(0)))
+	val a7_x = Reverse(Cat(a7(5),a7(0)))
+	val a8_x = Reverse(Cat(a8(5),a8(0)))
+	
+	
+	val a1_y = Reverse(a1(4,1))
+	val a2_y = Reverse(a2(4,1))
+	val a3_y = Reverse(a3(4,1))
+	val a4_y = Reverse(a4(4,1))
+	val a5_y = Reverse(a5(4,1))
+	val a6_y = Reverse(a6(4,1))
+	val a7_y = Reverse(a7(4,1))
+	val a8_y = Reverse(a8(4,1))*/
+	
+	
+	val a1_x = (Cat(a1(5),a1(0)))
+	val a2_x = (Cat(a2(5),a2(0)))
+	val a3_x = (Cat(a3(5),a3(0)))
+	val a4_x = (Cat(a4(5),a4(0)))
+	val a5_x = (Cat(a5(5),a5(0)))
+	val a6_x = (Cat(a6(5),a6(0)))
+	val a7_x = (Cat(a7(5),a7(0)))
+	val a8_x = (Cat(a8(5),a8(0)))
+	
+	
+	val a1_y = (a1(4,1))
+	val a2_y = (a2(4,1))
+	val a3_y = (a3(4,1))
+	val a4_y = (a4(4,1))
+	val a5_y = (a5(4,1))
+	val a6_y = (a6(4,1))
+	val a7_y = (a7(4,1))
+	val a8_y = (a8(4,1))
+	
+	/*val a1_y = a1(1,4)
+	val a2_y = a2(1,4)
+	val a3_y = a3(1,4)
+	val a4_y = a4(1,4)
+	val a5_y = a5(1,4)
+	val a6_y = a6(1,4)
+	val a7_y = a7(1,4)
+	val a8_y = a8(1,4)*/
+	
 	
     val x = Cat(s1(a1_x)(a1_y),
 				s2(a2_x)(a2_y), 

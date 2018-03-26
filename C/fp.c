@@ -4,7 +4,7 @@ static inline unsigned long ip(unsigned long input_block)
 {
 	unsigned long output_block;
 	//asm volatile ("fence");
-	ROCC_INSTRUCTION_DS(0, output_block, input_block, 0);
+	ROCC_INSTRUCTION_DS(1, output_block, input_block, 0);
 	return output_block;
 }
 
@@ -16,7 +16,7 @@ int main(void)
     volatile unsigned long output_block;
     //unsigned long modified_block;
     
-	for(int i=0; i < 1; i++)
+	for(int i=0; i < 1000; i++)
     {
         output_block = ip(input_block);
         //input_block = output_block;

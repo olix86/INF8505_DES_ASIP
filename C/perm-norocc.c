@@ -1,13 +1,9 @@
 #include "rocc.h"
 
-int ip[64] = 	{58, 50, 42, 34, 26, 18, 10, 2,
-				60, 52, 44, 36, 28, 20, 12, 4,
-				62, 54, 46, 38, 30, 22, 14, 6,
-				64, 56, 48, 40, 32, 24, 16, 8,
-				57, 49, 41, 33, 25, 17,  9, 1,
-				59, 51, 43, 35, 27, 19, 11, 3,
-				61, 53, 45, 37, 29, 21, 13, 5,
-				63, 55, 47, 39, 31, 23, 15, 7};
+int ip[32] = 	{16 ,7 ,20 ,21 ,29 ,12 ,28 ,17,
+                1 ,15 ,23 ,26 ,5 ,18 ,31 ,10,
+                2 ,8 ,24 ,14 ,32 ,27 ,3 ,9,
+                19 ,13 ,30 ,6 ,22 ,11 ,4 ,25};
 
 int main(void)
 {
@@ -16,10 +12,10 @@ int main(void)
     //unsigned long modified_block;
         
 	//int i;
-    for(int i=0; i < 1; i++)
+    for(int i=0; i < 1000; i++)
     {
         //modified_block = input_block + i;
-        for (int j = 0; j < 64; j++) {
+        for (int j = 0; j < 32; j++) {
             int shift_size;
             unsigned char shift_byte;
             shift_size = ip[j];
@@ -33,3 +29,4 @@ int main(void)
 	return 0;
 
 }
+
